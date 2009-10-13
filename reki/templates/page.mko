@@ -1,0 +1,76 @@
+## -*- coding: utf-8 -*-
+<html>
+    <title>Reki :: Restful Structured Wiki</title>
+    <body>
+
+<style type="text/css">
+body {
+  color:#222222;
+  font-family:"Sabon LT Std","Hoefler Text","Palatino Linotype","Book Antiqua",serif;
+  font-size:18px;
+}
+
+h2 {
+  padding-left:4px;
+}
+
+div.pages_index {
+  float:right;
+}
+
+</style>
+
+<h2>Reki :: Restful Structured Wiki</h2>
+
+
+<script type="text/javascript" src="/static/jquery-1.3.1.js" ></script>
+<script type="text/javascript">
+
+var edit = function () {
+  $("#page_body").hide();
+  $("#editor").show();
+}
+
+var save = function () {
+  var passed = _save();
+  if (passed) {
+    $("#page_body").show();
+    $("#editor").hide();
+  }
+}
+
+$(document).ready(function () {
+  $("#editor").hide().css("padding-left", "100px").css("padding-left", "100px");
+  $('#page_body').css("padding-left", "100px").css("padding-left", "100px");
+  $("textarea.editor-textarea").width("80%");
+  $("textarea.editor-textarea").css("background-color","#AFDCEC")
+
+
+  if (${len(page.get("body_raw",""))} < 200) {
+    document.getElementById('editor-textarea').style.height = "400px";
+  }
+  })
+
+</script>
+
+<div class="body" id="page_body" style="">
+  ${page.get("body_rendered", "No Page Yet")}
+  <br>
+  <a href="#" onclick="edit()">edit</a>
+</div>
+
+<div class="editor" id="editor">
+  <textarea class="editor-textarea" id="editor-textarea">${page.get("body_raw", "")}</textarea>
+  <br>
+  <a href="#" onclick="save()">save</a>
+</div>
+
+<div class="pages_index", id="pages_index">
+% for key, value in pages_index.items():
+${key} ${value}
+% endfor  
+</div>
+
+    </body>
+</html>
+
